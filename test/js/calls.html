@@ -1,0 +1,50 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $.ajax(
+	{
+	url:"http://localhost:8080/App/setAppointement.php?userId=49&fromLoc=Chirala,%20Andhra%20Pradesh,%20India&toLoc=Ramachandrapuram,%20Andhra%20Pradesh,%20India&dAt=2015-04-21%2002:02:02&tripFlag=Y",
+	dataType: 'json',
+	success:function(result)
+	{
+      console.log(result);
+	var r=confirm(result.message.waitingTime);
+	if (r==true)
+	{
+		nattu();
+    }
+		else
+		  {
+		  x="You pressed Cancel!";
+		  }
+    }
+	});
+  }); 
+function nattu()
+{
+$.ajax(
+	{
+	url:"http://localhost:8080/App/setAppointement.php?&type=bookAuto&autoId=1001&dAt=2014-04-27 06:26:06",
+	dataType: 'json',
+	success:function(result)
+	{
+	console.log(result);
+	console.log(result.status);
+	},
+	error:function(result)
+	{
+	console.log("error");
+	}
+	});
+}
+});
+</script>
+</head>
+<body>
+<button>Book Auto</button>
+</body>
+</html>

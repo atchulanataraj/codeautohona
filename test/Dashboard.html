@@ -1,0 +1,71 @@
+<html>
+<body>
+<head>
+<link rel="stylesheet" type="text/css" href="theme.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+</script>
+<style>
+body{
+ font-family: Calibri;
+ }
+
+#ws th
+{
+    padding: 10px;
+    background-color:#258ecd;
+    color: white;
+    
+}
+#ws td
+{
+	text-align: center;
+	padding: 10px;
+    background-color:#EEE;
+    color: #258ecd;
+} 
+</style>
+<script>
+  function initialize()
+  {
+    $.ajax(
+	{
+	url:"http://autohonatest.meximas.com/service/setAppointement.php?&type=admin_apav",
+	dataType: 'json',
+	success:function(result)
+	{
+      console.log(result);
+	  for(i=0;i<result[0].data.length;i++)
+        {
+        $('#ws').append('<tr><td>'+result[0].data[i].auto_id+'</td><td>'+result[0].data[i].appointed_start_datetime+'</td><td>'+result[0].data[i].appointed_end_datetime+'</td></tr>');
+        }
+    }
+	});
+  }
+</script>
+</head>
+<body onload="initialize()">
+<div id="pagewrap">
+
+	<div id="header">
+		<h1><center>Welcome to Autohona Admin panel</center></h1>
+	</div>
+		
+	<div id="content">
+	<h2><center>Appointed autos</center></h2>
+		<table style="width: 100%;" id="ws">
+    <tr>
+        <th>Auto ID</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+    </tr>
+    
+</table>
+	</div>	
+	<div id="footer">
+		<h4>Add Appointment</h4>
+		<p><a href="http://www.autohonatest.meximas.com" target="new">Visit Autohona to add appointments<a></p>
+	</div>
+
+</div>
+</body>
+</html>
